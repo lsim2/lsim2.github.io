@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lina Sim · Software Engineer</title>
+<meta name="description" content="Software engineer. Work, projects, art, dance, and other things I make.">
+<meta name="theme-color" content="#f4efe0">
+
+<link rel="canonical" href="https://lsim2.github.io/">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/favicon.svg">
+<link rel="icon" type="image/png" href="images/favicon_io/favicon.svg">
+
+
+<!-- link previews (Slack, LinkedIn, iMessage, etc.). preview.png should be 1200×630 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lina Sim · Software Engineer">
+<meta property="og:description" content="Software engineer. Work, projects, art, dance, and other things I make.">
+<meta property="og:url" content="https://lsim2.github.io/">
+<meta property="og:image" content="https://lsim2.github.io/preview.png">
+<meta property="og:image:alt" content="Lina Sim: a cat face logo next to her name and the words software engineer.">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Lina Sim",
+  "jobTitle": "Software Engineer",
+  "url": "https://lsim2.github.io/",
+  "sameAs": [
+    "https://github.com/lsim2",
+    "https://www.linkedin.com/in/lina-sim-130026126/"
+  ]
+}
+</script>
+<script>document.documentElement.classList.add("js");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<style>
+  /* ------------------------------------------------------------
+     TOKENS: change colors and fonts here
+     ------------------------------------------------------------ */
+  :root {
+    color-scheme: light;
+    --cream:      #f4efe0;
+    --grid:       rgba(176, 120, 110, .20);
+    --ink:        #3b2314;
+    --ink-soft:   #6b5545;
+    --tape:       #e6e1d1;
+    --butter:     #f2e196;
+    --card:       #fffdf6;   /* J-card paper */
+    --cassette-dark: #74553f;
+    --wood:       #c9a98a;
+    --button:     #8bb79a;
+
+    --font-type: "Special Elite", "American Typewriter", "Courier New", monospace;
+    --font-hand: "Reenie Beanie", "Segoe Print", "Bradley Hand", cursive;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: var(--font-type);
+    font-size: 18px;
+    line-height: 1.65;
+    background-color: var(--cream);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  h1, h2, h3 { font-weight: normal; margin: 0; }
+  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.15; text-align: center; margin-bottom: 24px; }
+  h2 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; }
+  p  { margin: 0 0 20px; max-width: 62ch; }
+
+  a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--button); }
+  a:hover { text-decoration-color: var(--ink); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+
+  /* ------------------------------------------------------------
+     MASKING TAPE
+     The torn shape is a pseudo-element so the drop shadow on the
+     parent isn't clipped away.
+     ------------------------------------------------------------ */
+  .tape {
+    position: relative;
+    isolation: isolate;
+    padding: 8px 16px;
+    font-family: var(--font-hand);
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--ink);
+    filter: drop-shadow(0 1px 1px rgba(59, 35, 20, .25));
+  }
+  .tape::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background: var(--tape);
+    clip-path: polygon(0 6%, 4% 0, 9% 5%, 15% 0, 22% 6%, 30% 1%, 38% 5%, 47% 0, 55% 5%, 64% 1%, 72% 6%, 81% 0, 89% 5%, 96% 1%, 100% 5%,
+                       100% 94%, 95% 100%, 88% 95%, 80% 100%, 71% 94%, 62% 99%, 53% 95%, 44% 100%, 35% 94%, 26% 99%, 17% 95%, 9% 100%, 3% 94%, 0 98%);
+  }
+
+  /* ------------------------------------------------------------
+     TOP LINKS
+     ------------------------------------------------------------ */
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; margin: 0 0 40px; padding: 0; list-style: none; }
+  .links a.tape { display: inline-block; text-decoration: none; transition: transform .15s ease; }
+  .links li:nth-child(odd)  a.tape { transform: rotate(-1.5deg); }
+  .links li:nth-child(even) a.tape { transform: rotate(1.2deg); }
+  .links a.tape:hover { transform: rotate(0) translateY(-2px); }
+
+  /* ------------------------------------------------------------
+     INTRO
+     ------------------------------------------------------------ */
+  .intro {
+    max-width: 680px; margin: 0 auto 32px;
+    padding: 20px 24px 4px;
+    background: rgba(244, 239, 224, .92);
+    border-radius: 14px;
+  }
+  /* justified blurb on wider screens: even edges on both sides.
+    Left-aligned on phones, where a narrow typewriter column would leave big gaps between words.
+    To turn justification off everywhere, delete this block. */
+  @media (min-width: 640px) {
+    .intro p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+  }
+  .hl { background: linear-gradient(transparent 55%, var(--butter) 55% 92%, transparent 92%); padding: 0 3px; }
+
+  .tapes-intro { margin-bottom: 40px; color: var(--ink-soft); }
+
+  /* ------------------------------------------------------------
+     CATEGORY COLORS (spine uses accent, cassette uses body)
+     ------------------------------------------------------------ */
+  .t1 { --accent: #9fc8aa; }       /* work: green */
+  .t2 { --accent: #f5e18b; }   /* projects: yellow */
+  .t3 { --accent: #cea1d8; }        /* art: purple */
+  .t4 { --accent: #a2acc5; }       /* dance: blue */
+  .t5 { --accent: #f5a1c2; }      /* about: pink */
+
+  /* ------------------------------------------------------------
+     TAPES (face-up version)
+     Five cassettes lie face up. Click one and it lifts, and its
+     J-card unfolds underneath. With no JavaScript the cassettes are
+     hidden and the five J-cards just stack.
+     ------------------------------------------------------------ */
+  .tapes { display: flex; flex-direction: column; gap: 28px; }
+  .spine { display: none; }
+
+  .panel[hidden] { display: none !important; }
+  .panel.swap { animation: slide .3s ease-out; }
+  @keyframes slide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  html:not(.js) .jhead h3 .sr { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
+
+  .js .tapes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);           /* phones: two cassettes per row */
+    gap: 24px 16px;
+    align-items: start;
+    max-width: 992px; margin: 0 auto;
+  }
+
+  /* each cassette is a button holding an image */
+  .js .spine {
+    position: relative;
+    display: block;
+    grid-column: span 2;
+    width: 100%; aspect-ratio: 640 / 447;        /* match the image's width:height */
+    padding: 0; border: 0; background: none;
+    font: inherit; color: inherit; cursor: pointer; text-align: center;
+    transform: rotate(-2deg);
+    transition: transform .25s ease;
+  }
+  .js .spine:nth-of-type(even) { transform: rotate(1.5deg); }
+  .js .spine:nth-of-type(5)    { grid-column: 2 / span 2; }
+
+  .js .spine .face {
+    display: block; width: 100%; height: 100%; object-fit: contain;
+    border-radius: 12px;               /* <- add this */
+    filter: drop-shadow(0 10px 14px rgba(59, 35, 20, .22));
+    transition: filter .25s ease;
+  }
+
+  /* the category name is live text laid over the blank tape strip in the artwork */
+  .js .spine .c-label {
+    position: absolute; top: 13.2%; left: 12.8%; right: 12.7%; height: 18.6%;
+    display: grid; place-items: center;
+    padding: 0; text-align: center;
+    font-size: 24px;
+    filter: none;
+  }
+  .js .spine .c-label::before { display: none; }       /* the artwork already has the tape */
+
+  .js .spine:hover { transform: translateY(-5px) rotate(0); }
+  .js .spine[aria-expanded="true"] {
+    transform: translateY(-12px) scale(1.1) rotate(0);
+    z-index: 2;
+  }
+  .js .spine[aria-expanded="true"] .face { filter: drop-shadow(0 20px 22px rgba(59, 35, 20, .3)); }
+  /* while a tape is open, the others settle back a little (they still brighten on hover) */
+  .js .tapes:has(.spine[aria-expanded="true"]) .spine[aria-expanded="false"] { filter: saturate(.7); }
+  .js .tapes:has(.spine[aria-expanded="true"]) .spine[aria-expanded="false"]:hover { filter: none; }
+
+  .js .panel { grid-column: 1 / -1; padding: 28px 0 0; }
+
+  /* --- the J-card: the paper insert for the open tape --- */
+  .jcard {
+    position: relative; z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 28px 28px 12px;
+    background: var(--card);
+    border-top: 12px solid var(--accent);
+    border-radius: 4px;
+    box-shadow: 0 8px 18px rgba(59, 35, 20, .15);
+    transform: rotate(.6deg);
+  }
+  .jhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px dashed rgba(59, 35, 20, .2); }
+  .jhead h3 { font-size: 20px; line-height: 1.3; }
+  .jhead .count { font-size: 15px; color: var(--ink-soft); margin: 0; max-width: none; white-space: nowrap; }
+
+  .tracks { list-style: none; margin: 0; padding: 0; counter-reset: track; }
+  .tracks li {
+    counter-increment: track;
+    display: grid; grid-template-columns: 28px 1fr; column-gap: 8px;
+    margin-bottom: 16px;
+  }
+  .tracks li::before {
+    content: counter(track) ".";
+    font-family: var(--font-hand); font-size: 28px; line-height: 1.1; color: var(--ink-soft);
+  }
+  .tracks a { font-size: 19px; line-height: 1.3; }
+  .tracks .desc { display: block; font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin-top: 2px; }
+  .tracks .tag  { display: block; font-size: 14px; line-height: 1.4; color: var(--ink-soft); opacity: .85; }
+
+  /* optional taped polaroid on a track: add class "has-thumb" to the <li> and a .polaroid link */
+  .tracks li.has-thumb { grid-template-columns: 28px 1fr 100px; column-gap: 8px; }
+  .polaroid {
+    position: relative; display: block; align-self: start;
+    width: 200px; margin-top: 4px;
+    padding: 6px 6px 20px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(59, 35, 20, .22);
+    transform: rotate(2.5deg);
+    text-decoration: none;
+  }
+  .tracks li:nth-child(even) .polaroid { transform: rotate(-2.5deg); }
+  .polaroid::before {                       /* strip of tape holding it on */
+    content: "";
+    position: absolute; top: -9px; left: 50%;
+    width: 44px; height: 16px; margin-left: -22px;
+    background: rgba(230, 225, 209, .88);
+    box-shadow: 0 1px 1px rgba(59, 35, 20, .12);
+    transform: rotate(-4deg);
+  }
+  .polaroid .shot {
+    display: grid; place-items: center;
+    aspect-ratio: 4 / 3; overflow: hidden;
+    background: #ebe6d6;
+    outline: 1px dashed rgba(59, 35, 20, .28); outline-offset: -4px;
+    font-family: var(--font-hand); font-size: 18px; line-height: 1; color: var(--ink-soft);
+  }
+  .polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 480px) {              /* tight screens: thumbnail drops under the text */
+    .tracks li.has-thumb { grid-template-columns: 28px 1fr; }
+    .tracks li.has-thumb .polaroid { grid-column: 2; margin-top: 10px; }
+  }
+
+  /* ------------------------------------------------------------
+     PROJECTS: thumbnail grid (YouTube-style)
+     Used by the projects, art and dance J-cards (class "jcard-grid").
+     To change the thumbnail shape, edit --thumb-ratio (16 / 9, 4 / 3, ...).
+     ------------------------------------------------------------ */
+  .jcard-grid { max-width: 880px; transform: rotate(.4deg); --thumb-ratio: 16 / 10; }
+  .jcard-grid .jhead { margin-bottom: 24px; }
+
+  .tracks.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 28px 24px;
+    margin-bottom: 16px;
+  }
+  .projects li { display: block; margin: 0; }
+  .projects li::before { display: none; }            /* no track numbers in the grid */
+
+  .project { display: block; color: inherit; text-decoration: none; }
+  .project .thumb {
+    position: relative; display: block;
+    aspect-ratio: var(--thumb-ratio); overflow: hidden;
+    background: #ebe6d6;
+    border: 1px solid rgba(59, 35, 20, .18);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(59, 35, 20, .18);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .project .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .project .thumb .placeholder {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    outline: 1px dashed rgba(59, 35, 20, .28); outline-offset: -6px; border-radius: 8px;
+    font-family: var(--font-hand); font-size: 22px; line-height: 1; color: var(--ink-soft);
+  }
+  .project .p-title {
+    display: block; margin-top: 10px;
+    font-size: 19px; line-height: 1.3;
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color .15s ease;
+  }
+  .project .p-desc { display: block; margin-top: 2px; font-size: 15px; line-height: 1.45; color: var(--ink-soft); }
+  .project:hover .thumb, .project:focus-visible .thumb { transform: translateY(-3px); box-shadow: 0 8px 14px rgba(59, 35, 20, .22); }
+  .project:hover .p-title, .project:focus-visible .p-title { text-decoration-color: var(--button); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project .thumb, .project .p-title { transition: none; }
+    .project:hover .thumb, .project:focus-visible .thumb { transform: none; }
+  }
+
+  /* tablets: three per row */
+  @media (min-width: 560px) {
+    #tapes, .tapes-intro { text-align: center; }
+    .tapes-intro { margin: 0 auto 40px; }
+    .js .tapes { grid-template-columns: repeat(6, 1fr); }
+    .js .spine:nth-of-type(4) { grid-column: 2 / span 2; }
+    .js .spine:nth-of-type(5) { grid-column: 4 / span 2; }
+    .js .spine .c-label { font-size: 28px; }
+  }
+
+  /* desktop: all five in one row */
+  @media (min-width: 880px) {
+    .tapes-intro { margin-bottom: 56px; }
+    .js .tapes { grid-template-columns: repeat(5, 1fr); gap: 32px 20px; }
+    .js .spine, .js .spine:nth-of-type(4), .js .spine:nth-of-type(5) { grid-column: auto; }
+    .js .spine .c-label { font-size: 28px; }
+    .js .panel { padding-top: 40px; }
+  }
+
+  /* ------------------------------------------------------------
+     FOOTER
+     ------------------------------------------------------------ */
+  footer { margin-top: 96px; text-align: center; color: var(--ink-soft); font-size: 16px; }
+  footer p { margin: 0 auto; }
+
+  @media (max-width: 640px) {
+    .intro { padding: 16px 18px 0; margin-bottom: 56px; }
+    .jcard { padding-left: 18px; padding-right: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .links a.tape, .js .spine { transition: none; }
+    .panel.swap { animation: none; }
+  }
+
+  /* text for screen readers and search engines that isn't shown on screen */
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ------------------------------------------------------------
+     PRINT: show all five tapes as a plain list
+     ------------------------------------------------------------ */
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .links { display: none; }
+    .js .tapes { display: block; }
+    .spine, .js .spine { display: none !important; }
+    .js .panel, .panel[hidden] { display: block !important; padding: 0 0 24px; break-inside: avoid; }
+    .polaroid { display: none; }
+    .project .thumb { display: none; }
+    .tracks.projects { display: block; }
+    .projects li { margin-bottom: 16px; }
+    .jcard { margin: 0; padding-top: 16px; transform: none; box-shadow: none; border: 1px solid #ccc; border-top: 8px solid var(--accent); }
+    .jhead h3 .sr { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
+    .tape { filter: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10pt; color: #555; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== TOP: name + links ===== -->
+  <header>
+    <h1>lina sim</h1>
+    <ul class="links">
+      <!-- EDIT: put your resume PDF next to this file (e.g. resume.pdf) -->
+      <li><a class="tape" target="_blank" href="https://drive.google.com/file/d/1p7SKCdUYEBy_Dd_AcSmMwr0vxMLrg1Vw/view?usp=sharing">resume</a></li>
+      <!-- <li><a class="tape" href="https://github.com/lsim2">github</a></li> -->
+      <li><a class="tape" href="https://www.linkedin.com/in/lina-sim-130026126/" target="_blank">linkedin</a></li>
+      <!-- <li><a class="tape" href="mailto:you@example.com">email</a></li> -->
+    </ul>
+  </header>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro" aria-label="About me">
+    <!-- EDIT: 2-3 plain, specific sentences -->
+    <p>
+      <p>Hi, I'm Lina :) </p>
+      I'm a <span class="hl">software engineer</span> with 6 years of experience building web products.
+      I love good design, data visualization, and working on fun teams.</p>
+      <p>Outside of work I like working on little art projects, dance and host silly parties for my friends!</p>
+  </section>
+
+  <!-- ===== TAPES ===== -->
+  <section aria-labelledby="tapes">
+    <!-- <h2 id="tapes">tapes</h2> -->
+    <!-- <p class="tapes-intro">Pick a tape to see what's on it.</p> -->
+
+    <div class="tapes" id="tapes-root">
+
+      <!-- cassettes (click to open) -->
+      <button class="spine t1" style="--i:1" type="button" id="spine-work" aria-controls="panel-work" aria-expanded="true">
+        <img class="face" src="images/1.png" alt="" width="640" height="447">
+        <span class="tape c-label">work</span>
+      </button>
+      <button class="spine t2" style="--i:2" type="button" id="spine-projects" aria-controls="panel-projects" aria-expanded="false">
+        <img class="face" src="images/2.png" alt="" width="640" height="447">
+        <span class="tape c-label">projects</span>
+      </button>
+      <button class="spine t3" style="--i:3" type="button" id="spine-art" aria-controls="panel-art" aria-expanded="false">
+        <img class="face" src="images/3.png" alt="" width="640" height="447">
+        <span class="tape c-label">art</span>
+      </button>
+      <button class="spine t4" style="--i:4" type="button" id="spine-dance" aria-controls="panel-dance" aria-expanded="false">
+        <img class="face" src="images/4.png" alt="" width="640" height="447">
+        <span class="tape c-label">dance</span>
+      </button>
+      <button class="spine t5" style="--i:5" type="button" id="spine-about" aria-controls="panel-about" aria-expanded="false">
+        <img class="face" src="images/5.png" alt="" width="640" height="447">
+        <span class="tape c-label">about me</span>
+      </button>
+
+      <!-- J-cards -->
+      <div class="panel t1" id="panel-work" role="region" aria-labelledby="spine-work">
+        <div class="jcard">
+          <div class="jhead"><h3><span class="sr">work: </span>the day job</h3><p class="count" data-count>tracks</p></div>
+          <ul class="tracks">
+            <li><div>Senior Frontend Engineer, HubSpot<span class="desc">2025 - now</span></div></li>
+            <li><div>Senior Software Engineer, Meta<span class="desc">2023 - 2025</span></div></li>
+            <li><div>Software Engineer, Meta<span class="desc">2021 - 2023</span></div></li>
+            <li><div>Software Engineering Intern, Google<span class="desc">2018</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel t2" id="panel-projects" role="region" aria-labelledby="spine-projects">
+        <div class="jcard jcard-grid">
+          <div class="jhead"><h3><span class="sr">projects: </span>built for fun</h3><p class="count" data-count>tracks</p></div>
+          <ul class="tracks projects">
+            <li>
+              <a class="project" href="https://lsim2.github.io/littleHue/" target="_blank">
+                <span class="thumb"><img src="images/littleHueSmall.png" alt="Little Hue title screen: a pink blob under the game title, with colorful hills below" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">Little Hue</span>
+                <span class="p-desc">A birthday present for my sister: a fun platform game bringing color to worlds.</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="https://lsim2.github.io/SpaceCats/" target="_blank">
+                <span class="thumb"><img src="images/spaceCats.png" alt="Space Cats title screen: two cats in space helmets floating among planets" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">Space Cats</span>
+                <span class="p-desc">Flappy bird but with cats in space! Cats are inspired by real cats, and art was made in Google Slides.</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="https://lsim2.github.io/class-colors/" target="_blank">
+                <span class="thumb"><img src="images/classColors.png" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">What color is class?</span>
+                <span class="p-desc">A visualization of what colors my friends associated with class subjects.</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel t3" id="panel-art" role="region" aria-labelledby="spine-art">
+        <div class="jcard jcard-grid">
+          <div class="jhead"><h3><span class="sr">art: </span>silly arts & crafts projects</h3><p class="count" data-count>tracks</p></div>
+          <ul class="tracks projects">
+            <li>
+              <a class="project" href="https://lsim2.github.io/mixtapesGirlies/" target="_blank">
+                <span class="thumb"><img src="images/mixtape.png" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">A mixtape for you</span>
+                <span class="p-desc">I made digital mixtapes for all my friends</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="https://lsim2.github.io/mixtapesGirlies/" target="_blank">
+                <span class="thumb"><img src="images/mixtapePhysical.jpg" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">A mixtape for you</span>
+                <span class="p-desc">And then I made them into physical mixtape NFC-enabled magnets!</span>
+              </a>
+            </li>
+            <li>
+              <p class="project">
+                <span class="thumb"><img src="images/octopi.jpeg" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">Octopi Army</span>
+                <span class="p-desc">An army of crocheted octopi</span>
+              </p>
+            </li>
+            <li>
+              <p class="project">
+                <span class="thumb"><img src="images/teaZine.HEIC" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">TeaZines</span>
+                <span class="p-desc">Made my own zines inspired by tea!</span>
+              </p>
+            </li>
+            <li>
+              <a class="project" href="https://www.youtube.com/watch?v=56uYN-o8_80" target="_blank">
+                <span class="thumb"><img src="images/atla.png" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">Avatar: The Last Airbender</span>
+                <span class="p-desc">Google Slides Animation. I love making art in Google Slides!</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="https://lsim2.github.io/The-Four-Loves/" target="_blank">
+                <span class="thumb"><img src="images/fourLoves.png" alt="class colors visualization" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">The Four Loves</span>
+                <span class="p-desc">A comic, also made in Google Slides </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel t4" id="panel-dance" role="region" aria-labelledby="spine-dance">
+        <div class="jcard jcard-grid">
+          <div class="jhead"><h3><span class="sr">dance: </span>dance projects</h3><p class="count" data-count>tracks</p></div>
+          <ul class="tracks projects">
+            <li>
+              <a class="project" href="https://www.youtube.com/watch?v=TY6j5NWFzGo" target="_blank">
+                <span class="thumb"><img src="images/dom.png" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">OffBrnd Boston</span>
+                <span class="p-desc">KPOP in Public</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="https://www.youtube.com/watch?v=eeb_PvmqqvM" target="_blank">
+                <span class="thumb"><img src="images/staytonight.png" width="320" height="240" loading="lazy"></span>
+                <span class="p-title">More KPOP</span>
+                <span class="p-desc">Stay Tonight - Chungha</span>
+              </a>
+            </li>
+            <li>
+              <a class="project" href="#">
+                <span class="thumb"><span class="placeholder">coming soon!</span></span>
+                <span class="p-title">RE:DEFINE Crew</span>
+                <span class="p-desc">Contemporary/Hip-hop fusion</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel t5" id="panel-about" role="region" aria-labelledby="spine-about">
+        <div class="jcard">
+          <div class="jhead"><h3><span class="sr">about: </span>the long version</h3><p class="count" data-count>tracks</p></div>
+          <ul class="tracks">
+            <li><div><span class="t-title">Grew up in Penang, Malaysia</span><span class="desc">Island hawker food, humid afternoons, and where it all started.</span></div></li>
+            <li><div><span class="t-title">High school in Armenia</span><span class="desc">A big change of scenery, and a whole new set of friends, food and languages to pick up.</span></div></li>
+            <li><div><span class="t-title">Moved to the States for college</span><span class="desc">Came over for school and stayed to build a career in tech.</span></div></li>
+            <li><div><span class="t-title">Creating community</span><span class="desc">I’m happiest when I’m bringing people together, whether that’s a dance crew, a silly party or a fun team at work.</span></div></li>
+            <li><div><span class="t-title">Making cool things</span><span class="desc">Games, visualizations, art and anything else I can build with my hands or in a browser.</span></div></li>
+            <li><div><span class="t-title">Teaching dance</span><span class="desc">A side hobby I love. Sharing choreography and watching people get excited about moving is the best part.</span></div></li>
+          </ul>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>made with too many notebooks</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("tapes-root");
+    var spines = Array.prototype.slice.call(root.querySelectorAll(".spine"));
+    var panels = spines.map(function (s) { return document.getElementById(s.getAttribute("aria-controls")); });
+    var names = spines.map(function (s) { return s.id.replace("spine-", ""); });   // work, projects, art, dance, about
+    var calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // "N tracks" on each J-card, counted from its list
+    panels.forEach(function (p) {
+      var n = p.querySelectorAll(".tracks > li").length;
+      var el = p.querySelector("[data-count]");
+      if (el) el.textContent = n + (n === 1 ? " track" : " tracks");
+    });
+
+    // Only one spine is a Tab stop, so Tab goes from the shelf straight to the open tape's content.
+    // Left/Right arrows (and Home/End) move along the shelf.
+    function setRover(i) {
+      spines.forEach(function (s, k) { s.tabIndex = (k === i) ? 0 : -1; });
+    }
+
+    // #projects, #art, etc. make a tape linkable. replaceState doesn't add history entries or scroll.
+    function setHash(name) {
+      try { history.replaceState(null, "", name ? "#" + name : location.pathname + location.search); } catch (e) {}
+    }
+    function indexFromHash() { return names.indexOf(location.hash.replace("#", "")); }
+    function showShelf() {
+      var h = document.getElementById("tapes");
+      if (h) h.scrollIntoView({ block: "start", behavior: calm.matches ? "auto" : "smooth" });
+    }
+
+    function open(index, user) {
+      spines.forEach(function (s, i) {
+        var on = i === index;
+        s.setAttribute("aria-expanded", on ? "true" : "false");
+        panels[i].hidden = !on;
+      });
+      setRover(index);
+      var p = panels[index];
+      p.classList.remove("swap");
+      void p.offsetWidth;                         // restart the animation
+      if (user) { p.classList.add("swap"); setHash(names[index]); }
+
+      // make sure the opened cassette and J-card are on screen (only scrolls if they aren't)
+      if (user) {
+        p.scrollIntoView({ block: "nearest", behavior: calm.matches ? "auto" : "smooth" });
+      }
+    }
+
+    function closeAll() {
+      spines.forEach(function (s, i) {
+        s.setAttribute("aria-expanded", "false");
+        panels[i].hidden = true;
+      });
+      setHash("");
+    }
+
+    spines.forEach(function (s, i) {
+      s.addEventListener("click", function () {
+        if (s.getAttribute("aria-expanded") === "true") {
+          closeAll();                          // clicking the open tape puts it back on the shelf
+          return;
+        }
+        open(i, true);
+      });
+
+      s.addEventListener("keydown", function (e) {
+        var next = null;
+        if (e.key === "ArrowRight") next = (i + 1) % spines.length;
+        else if (e.key === "ArrowLeft") next = (i - 1 + spines.length) % spines.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = spines.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        spines[next].focus();
+        open(next, true);
+      });
+    });
+
+    // links like <a href="#art"> or a changed address-bar hash open that tape
+    window.addEventListener("hashchange", function () {
+      var i = indexFromHash();
+      if (i >= 0) { open(i, false); showShelf(); }
+    });
+
+    // start: the address hash wins, otherwise whichever spine is marked aria-expanded="true" in the HTML
+    var fromHash = indexFromHash();
+    var marked = spines.findIndex(function (s) { return s.getAttribute("aria-expanded") === "true"; });
+    open(fromHash >= 0 ? fromHash : (marked >= 0 ? marked : 0), false);
+    if (fromHash >= 0) showShelf();
+  })();
+</script>
+</body>
+</html>
